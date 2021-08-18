@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="html-head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/vendors.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="shortcut icon" th:href="@{/images/lq-favicon.svg}" type="image/svg+xml">
+    <title>LearningQueue</title>
+</head>
+
+<body>
+<header th:fragment="header" class="header">
+    <a th:href="@{/}">
+        <img class="w-36" th:src="@{/images/lq-logo.svg}" alt="Logo">
+    </a>
+    <h1 class="text-xl">LearningQueue</h1>
+</header>
+</body>
+
+</html>

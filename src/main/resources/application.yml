@@ -1,0 +1,44 @@
+handbook:
+  guides:
+    organization: learnque-guides
+  github:
+    # This optional property may be assigned using a "personal access token" created
+    # at https://github.com/settings/applications. It is used for accessing GitHub's
+    # API, even for operations that do not require authorization (e.g. Getting Started
+    # Guide repositories). This is done in order to work against higher rate limits
+    # (5000req/hour vs. the default 60req/hour without a token). When running the app
+    # locally, this lower default is fine. When running the app in production, the
+    # token is a must. See http://developer.github.com/v3/#rate-limiting.
+    token:
+  web:
+    home: ${HANDBOOK_HOME}/web
+    bin: ${HANDBOOK_HOME}/bin
+    tmp: ${HANDBOOK_HOME}/tmp
+spring:
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  datasource:
+    url: jdbc:h2:file:${HANDBOOK_HOME}/db/handbook;MODE=MySQL
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  groovy:
+    template:
+      cache: false
+      configuration:
+        auto-new-line: true
+      charset: UTF-8
+  web:
+    resources:
+      static-locations: classpath:/static/, file:${handbook.web.home}/
+      chain:
+        enabled: true
+        strategy:
+          content:
+            paths: /**
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always

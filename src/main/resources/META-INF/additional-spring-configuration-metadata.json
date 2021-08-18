@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "handbook.web.home",
+      "type": "java.lang.String",
+      "description": "Handbook home directory."
+    },
+    {
+      "name": "handbook.web.tmp",
+      "type": "java.lang.String",
+      "description": "Handbook tmp directory."
+    },
+    {
+      "name": "handbook.web.bin",
+      "type": "java.lang.String",
+      "description": "Handbook bin directory."
+    }
+  ]
+}

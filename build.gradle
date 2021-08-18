@@ -1,0 +1,127 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.8.0'
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+group = 'com.github.viktornar'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+//    implementation 'org.springframework.boot:spring-boot-starter-groovy-templates'
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootWar {
+    archiveName 'ROOT.war'
+}
+
+war {
+    archiveName 'ROOT.war'
+}
+
+apply plugin: 'com.bmuschko.cargo'
+
+cargo {
+    containerId = 'tomcat9x'
+}
+
+class TomcatContainer {
+    String name
+    String hostname
+    Integer port
+    String username
+    String password
+}
+
+def containers = [
+        new TomcatContainer(
+                name: 'remote',
+                hostname: System.getenv('TOMCAT_HOST'),
+                port: System.getenv('TOMCAT_PORT') as Integer,
+                username: System.getenv('TOMCAT_USER'),
+                password: System.getenv('TOMCAT_PASSWORD'),
+        )
+]
+
+apply plugin: 'com.bmuschko.cargo-base'
+
+cargo {
+    containerId = 'tomcat9x'
+    deployable {
+        context = '/'
+    }
+}
+
+cargoDeployRemote.dependsOn assemble
+cargoRedeployRemote.dependsOn assemble
+cargoUndeployRemote.dependsOn assemble
+
+containers.each { config ->
+    task "deployTo${config.name.capitalize()}Tomcat"(type: com.bmuschko.gradle.cargo.tasks.remote.CargoDeployRemote) {
+        description = "Deploys WAR to Tomcat '${config.name}'."
+        hostname = config.hostname
+        port = config.port
+        username = config.username
+        password = config.password
+    }
+}
+
+containers.each { config ->
+    task "redeployTo${config.name.capitalize()}Tomcat"(type: com.bmuschko.gradle.cargo.tasks.remote.CargoRedeployRemote) {
+        description = "Redeploys WAR to Tomcat '${config.name}'."
+        hostname = config.hostname
+        port = config.port
+        username = config.username
+        password = config.password
+    }
+}
+
+containers.each { config ->
+    task "undeployOn${config.name.capitalize()}Tomcat"(type: com.bmuschko.gradle.cargo.tasks.remote.CargoUndeployRemote) {
+        description = "Undeploy WAR to Tomcat '${config.name}'."
+        hostname = config.hostname
+        port = config.port
+        username = config.username
+        password = config.password
+    }
+}
