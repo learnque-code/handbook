@@ -1,5 +1,6 @@
 package com.github.viktornar.handbook;
 
+import com.github.viktornar.handbook.dao.GuideDao;
 import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.h2.H2DatabasePlugin;
@@ -52,5 +53,10 @@ public class HandbookConfig {
     @Bean
     public JdbiPlugin h2DatabasePlugin() {
         return new H2DatabasePlugin();
+    }
+
+    @Bean
+    public GuideDao guideDao(Jdbi jdbi) {
+        return jdbi.onDemand(GuideDao.class);
     }
 }

@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <changeSet author="viktor" id="Create GUIDE table for persisting guides">
-        <createTable tableName="GUIDE">
+        <createTable tableName="GUIDES">
             <column name="ID" type="${uuid_type}" defaultValueComputed="${uuid_function}">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -35,6 +35,6 @@
             </column>
         </createTable>
 
-        <addPrimaryKey constraintName="IDX_GUIDE_PK" tableName="GUIDE" columnNames="ID"/>
+        <addPrimaryKey constraintName="IDX_GUIDES_PK" tableName="GUIDES" columnNames="ID"/>
     </changeSet>
 </databaseChangeLog>
