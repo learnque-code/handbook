@@ -1,7 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="viktor" id="Create GUIDE table for persisting guides">
+        <createTable tableName="GUIDE">
+            <column name="ID" type="${uuid_type}" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="URL_PATH" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="PATH" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="TYPE" type="VARCHAR(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(500)">
+                <constraints nullable="false" />
+            </column>
+            <column name="TOPICS" type="VARCHAR(500)">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED" type="DATETIME" defaultValueComputed="NOW()">
+                <constraints nullable="false" />
+            </column>
+            <column name="CHANGED" type="DATETIME" defaultValueComputed="NOW() ON UPDATE NOW()">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey constraintName="IDX_GUIDE_PK" tableName="GUIDE" columnNames="ID"/>
+    </changeSet>
 </databaseChangeLog>

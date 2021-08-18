@@ -4,5 +4,17 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <property name="uuid_type" value="uuid" dbms="postgresql"/>
+    <property name="uuid_type" value="uniqueidentifier" dbms="mssql"/>
+    <property name="uuid_type" value="RAW(16)" dbms="oracle"/>
+    <property name="uuid_type" value="VARCHAR(255)" dbms="mysql"/>
+    <property name="uuid_type" value="VARCHAR(255)" dbms="h2"/>
+
+    <property name="uuid_function" value="uid.uuid_generate_v4()" dbms="postgresql"/>
+    <property name="uuid_function" value="NEWID()" dbms="mssql"/>
+    <property name="uuid_function" value="sys_guid()" dbms="oracle"/>
+    <property name="uuid_function" value="uuid()" dbms="mysql"/>
+    <property name="uuid_function" value="RANDOM_UUID()" dbms="h2"/>
+
     <include file="/db/changelog/db.changelog-1.0.0.xml"/>
 </databaseChangeLog>

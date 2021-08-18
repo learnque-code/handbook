@@ -21,9 +21,7 @@ import java.util.concurrent.TimeoutException;
 @RequiredArgsConstructor
 @RestController
 public class RepositoriesV1Controller extends ApiV1Controller {
-    private final GithubClient githubClient;
     private final RepositoryService repositoryService;
-    private final HandbookProperties properties;
 
     @GetMapping(value = {"/repositories"})
     @ResponseStatus(value = HttpStatus.OK)
