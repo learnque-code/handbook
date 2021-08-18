@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header::html-head">
+    <title></title>
 </head>
 <body>
 <div class="guides">
@@ -29,7 +30,7 @@
             </div>
         </dl>
     </main>
-    <footer th:replace="~{fragments/footer::footer}" />
+    <footer th:replace="~{fragments/footer::footer}"></footer>
 </div>
 <script th:src="@{/js/turbo.js}" type="module" async defer></script>
 </body>
