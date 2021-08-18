@@ -30,14 +30,16 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.jdbi:jdbi3-core:3.21.0'
+    implementation 'org.jdbi:jdbi3-spring5:3.21.0'
+    implementation 'org.jdbi:jdbi3-sqlobject:3.21.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
-//    implementation 'org.springframework.boot:spring-boot-starter-groovy-templates'
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
@@ -45,6 +47,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.jdbi:jdbi3-testing:3.21.0'
 }
 
 test {
