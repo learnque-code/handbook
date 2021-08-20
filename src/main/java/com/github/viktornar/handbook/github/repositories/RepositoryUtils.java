@@ -1,4 +1,4 @@
-package com.github.viktornar.handbook.repositories;
+package com.github.viktornar.handbook.github.repositories;
 
 import java.io.IOException;
 import java.nio.file.*;

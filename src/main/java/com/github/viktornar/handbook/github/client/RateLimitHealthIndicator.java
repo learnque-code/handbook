@@ -1,4 +1,4 @@
-package com.github.viktornar.handbook.client.github;
+package com.github.viktornar.handbook.github.client;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;

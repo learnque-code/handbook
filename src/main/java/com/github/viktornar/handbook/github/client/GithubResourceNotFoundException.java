@@ -1,4 +1,4 @@
-package com.github.viktornar.handbook.client.github;
+package com.github.viktornar.handbook.github.client;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

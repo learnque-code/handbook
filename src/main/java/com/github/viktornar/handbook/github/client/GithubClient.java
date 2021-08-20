@@ -1,6 +1,6 @@
-package com.github.viktornar.handbook.client.github;
+package com.github.viktornar.handbook.github.client;
 
-import com.github.viktornar.handbook.repositories.Repository;
+import com.github.viktornar.handbook.github.repositories.Repository;
 import com.github.viktornar.handbook.HandbookProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;

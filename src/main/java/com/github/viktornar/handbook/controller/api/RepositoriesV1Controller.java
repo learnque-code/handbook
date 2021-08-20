@@ -1,10 +1,10 @@
 package com.github.viktornar.handbook.controller.api;
 
 import com.github.viktornar.handbook.dao.GuideDao;
-import com.github.viktornar.handbook.repositories.Repository;
-import com.github.viktornar.handbook.repositories.RepositoryExportException;
-import com.github.viktornar.handbook.repositories.RepositoryService;
-import com.github.viktornar.handbook.repositories.RepositoryType;
+import com.github.viktornar.handbook.github.repositories.Repository;
+import com.github.viktornar.handbook.github.repositories.RepositoryExportException;
+import com.github.viktornar.handbook.github.repositories.RepositoryService;
+import com.github.viktornar.handbook.github.repositories.RepositoryType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

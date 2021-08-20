@@ -1,7 +1,7 @@
-package com.github.viktornar.handbook.repositories;
+package com.github.viktornar.handbook.github.repositories;
 
 import com.github.viktornar.handbook.HandbookProperties;
-import com.github.viktornar.handbook.client.github.GithubClient;
+import com.github.viktornar.handbook.github.client.GithubClient;
 import com.github.viktornar.handbook.task.MdCompileTask;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
