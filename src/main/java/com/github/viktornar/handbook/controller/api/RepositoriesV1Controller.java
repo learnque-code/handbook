@@ -2,6 +2,7 @@ package com.github.viktornar.handbook.controller.api;
 
 import com.github.viktornar.handbook.dao.GuideDao;
 import com.github.viktornar.handbook.repositories.Repository;
+import com.github.viktornar.handbook.repositories.RepositoryExportException;
 import com.github.viktornar.handbook.repositories.RepositoryService;
 import com.github.viktornar.handbook.repositories.RepositoryType;
 import lombok.RequiredArgsConstructor;
@@ -42,22 +43,36 @@ public class RepositoriesV1Controller extends ApiV1Controller {
         log.info("Re-indexing all repositories");
     }
 
-    @PostMapping(value = "/repositories/{name}/download")
+    @PostMapping(value = "/repositories/{repositoryName}/download")
     @ResponseStatus(value = HttpStatus.CREATED)
-    void downloadAndExtractRepository(@PathVariable String name) throws IOException, ExecutionException, InterruptedException, TimeoutException {
-        log.info("Got guide repository {{}} to download and extract", name);
-        var type = RepositoryType.fromRepositoryName(name);
-        Optional<Path> exportedPath = repositoryService.extract(type, name);
+    void downloadAndExtractRepository(@PathVariable String repositoryName) throws
+            IOException, ExecutionException, InterruptedException, TimeoutException, RepositoryExportException {
+        log.info("Got guide repository {{}} to download and extract", repositoryName);
+        var type = RepositoryType.fromRepositoryName(repositoryName);
+        Optional<Path> exportedPath = repositoryService.extract(type, repositoryName);
         exportedPath.ifPresent(path -> {
             log.info("Guide exported to {{}}", path);
-            var repository = repositoryService.getRepositoryByName(name);
+            var repository = repositoryService.getRepositoryByName(repositoryName);
             var tokens = repository.getDescription().split("::");
-            var title = String.join("::", Arrays.copyOfRange(tokens, 0, tokens.length - 1));
+            var name = String.join("::", Arrays.copyOfRange(tokens, 0, tokens.length - 1));
             var description = tokens[tokens.length - 1].trim();
             var topics = String.join(", ", repository.getTopics());
-            String id = guideDao.insertGuide("/guides/" + type + "/" + name,
-                    path.toString(), type.toString(), title, description, topics);
-            log.info("Guide metadata persisted in database with id {{}}", id);
+            var id = guideDao.existsByName(name);
+            Optional.ofNullable(id).ifPresentOrElse(ei -> {
+                var changed = guideDao.updateGuide("/guides/" + type + "/" + repositoryName,
+                        path.toString(), type.toString(), name, description, topics, ei);
+                Optional.ofNullable(changed).ifPresentOrElse(
+                        c -> log.info("Guide metadata updated in database with id {{}} at {{}}.", ei, changed),
+                        () -> log.warn("Was not able to update guide metadata."));
+            }, () -> {
+                String newId = guideDao.insertGuide("/guides/" + type + "/" + repositoryName,
+                        path.toString(), type.toString(), name, description, topics);
+                Optional.ofNullable(newId).ifPresentOrElse(
+                        ni -> log.info("Guide metadata persisted in database with id {{}}.", ni),
+                        () -> log.warn("Was not able to persist guide metadata."));
+            });
         });
+
+        exportedPath.orElseThrow(() -> new RepositoryExportException("Was not able to download and / or export repository"));
     }
 }

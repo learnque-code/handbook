@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 @Component
 public class GuideMapper implements RowMapper<Guide>{
