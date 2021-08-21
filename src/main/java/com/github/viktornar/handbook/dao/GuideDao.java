@@ -8,6 +8,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.transaction.Transaction;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public interface GuideDao {
@@ -28,4 +29,7 @@ public interface GuideDao {
     @Transaction
     @GetGeneratedKeys("id")
     String insertGuide(String urlPath, String path, String type, String name, String description, String topics);
+
+    @SqlQuery("select * from guides")
+    List<Guide> allGuides();
 }

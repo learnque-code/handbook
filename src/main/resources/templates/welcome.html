@@ -10,21 +10,18 @@
     <div th:replace="~{fragments/search-bar::search-bar}" aria-label="Search bar"></div>
     <main>
         <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-1 md:gap-x-8 md:gap-y-10">
-            <div class="flex max-w-1xl bg-white border-2 border-gray-300 p-5 rounded-md tracking-wide shadow-lg">
+            <div th:each="guide : ${guides}"
+                    class="flex max-w-1xl bg-white border-2 border-gray-300 p-5 rounded-md tracking-wide shadow-lg">
                 <div class="flex-shrink-0">
                     <div class="flex items-center justify-center h-36 w-36 rounded-md text-white border-2 border-gray-300">
                         <img alt="book" th:src="@{/images/books.svg}" />
                     </div>
                 </div>
                 <div class="ml-4">
-                    <dt class="text-lg leading-6 font-medium text-gray-900">
-                        FE :: Lesson 1 :: What html is?
-                    </dt>
-                    <dd class="mt-2 text-base text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </dd>
+                    <dt class="text-lg leading-6 font-medium text-gray-900" th:text="${guide.name}"></dt>
+                    <dd class="mt-2 text-base text-gray-500" th:text="${guide.description}"></dd>
                     <p>
-                        <a href="#" class="text-red-300 hover:text-red-400"> Read me &rarr; </a>
+                        <a th:href="${guide.urlPath}" target="_parent" class="text-red-300 hover:text-red-400"> Read me &rarr; </a>
                     </p>
                 </div>
             </div>
