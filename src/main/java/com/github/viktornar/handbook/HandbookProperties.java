@@ -38,6 +38,6 @@ public class HandbookProperties {
         private String home = "./web";
         private String bin = "./bin";
         private String tmp = "./web";
-        private String accessToken = "test";
+        private String accessToken = "";
     }
 }
