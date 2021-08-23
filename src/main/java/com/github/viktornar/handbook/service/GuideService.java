@@ -1,14 +1,18 @@
 package com.github.viktornar.handbook.service;
 
+import com.github.viktornar.handbook.HandbookProperties;
 import com.github.viktornar.handbook.dao.GuideDao;
+import com.github.viktornar.handbook.domain.Guide;
 import com.github.viktornar.handbook.github.repositories.RepositoryService;
 import com.github.viktornar.handbook.github.repositories.RepositoryType;
+import com.github.viktornar.handbook.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -39,5 +43,23 @@ public class GuideService {
                     ni -> log.info("Guide metadata persisted in database with id {{}}.", ni),
                     () -> log.warn("Was not able to persist guide metadata."));
         });
+    }
+
+    public void deleteById(String id) {
+        var guide = guideDao.findById(id);
+        Optional.ofNullable(guide).ifPresentOrElse(g -> {
+            log.info("Trying to remove guide with id {{}}", id);
+            var count = guideDao.deleteById(id);
+            log.info("Removed guide with id {{}} ({})", id, count);
+            assert guide != null;
+            var path = Path.of(guide.getPath());
+            FileUtils.deleteRecursively(path);
+        }, () -> {
+            log.warn("Unable to delete guide with id {{}}. Probably already removed.", id);
+        });
+    }
+
+    public List<Guide> findAll() {
+        return guideDao.allGuides();
     }
 }

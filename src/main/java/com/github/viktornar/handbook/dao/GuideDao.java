@@ -32,4 +32,10 @@ public interface GuideDao {
 
     @SqlQuery("select * from guides")
     List<Guide> allGuides();
+
+    @SqlQuery("select * from guides where id = ?")
+    Guide findById(String id);
+
+    @SqlUpdate("delete from guides where id = ?")
+    int deleteById(String id);
 }

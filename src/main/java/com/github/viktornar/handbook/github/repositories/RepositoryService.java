@@ -3,6 +3,7 @@ package com.github.viktornar.handbook.github.repositories;
 import com.github.viktornar.handbook.HandbookProperties;
 import com.github.viktornar.handbook.github.client.GithubClient;
 import com.github.viktornar.handbook.task.MdCompileTask;
+import com.github.viktornar.handbook.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
@@ -100,7 +101,7 @@ public class RepositoryService {
     private Path copy(RepositoryType type, String repositoryName, File unzippedRoot) throws IOException {
         var targetPath = Path.of(
                 properties.getWeb().getHome(), GUIDES_FOLDER, type.toString(), repositoryName);
-        RepositoryUtils.copyRecursively(
+        FileUtils.copyRecursively(
                 unzippedRoot.toPath().resolve(COMPILED_GUIDE_FOLDER), targetPath, StandardCopyOption.REPLACE_EXISTING);
         FileSystemUtils.deleteRecursively(unzippedRoot);
 
