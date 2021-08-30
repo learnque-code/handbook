@@ -1,6 +1,0 @@
-{
-  "imports": {
-    "@hotwired/turbo": "./@hotwired/turbo.js",
-    "stimulus": "./stimulus.js"
-  }
-}

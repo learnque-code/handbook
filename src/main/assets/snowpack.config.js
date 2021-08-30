@@ -1,8 +1,7 @@
 module.exports = {
     optimize: process.env.NODE_ENV === "production" ? {
         entrypoints: [
-            "js/turbo.js",
-            "js/connect-sse-controller.js",
+            "js/stimulus-application.js",
         ],
         bundle: true,
         minify: true,

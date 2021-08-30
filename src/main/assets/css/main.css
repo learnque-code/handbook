@@ -39,7 +39,6 @@ main {
 /* Header */
 .header {
     position: relative;
-    padding: 2rem;
     display: flex;
     justify-items: stretch;
     justify-content: flex-start;
