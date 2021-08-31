@@ -14,7 +14,7 @@
                     class="flex max-w-1xl bg-white border-2 border-gray-300 p-5 rounded-md tracking-wide shadow-lg">
                 <div class="flex-shrink-0">
                     <div class="flex items-center justify-center p-3 w-24 rounded-md text-white border-2 border-gray-300">
-                        <img alt="book" th:src="@{/images/books.svg}" />
+                        <a th:href="${guide.urlPath}" target="_parent"><img alt="book" th:src="@{/images/books.svg}" /></a>
                     </div>
                 </div>
                 <div class="ml-4">
