@@ -24,6 +24,14 @@ body {
     overflow-x: hidden;
 }
 
+.guides-list {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
 .guide {
     display: grid;
     grid-template-rows: auto 1fr auto;

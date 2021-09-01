@@ -5,9 +5,8 @@
     <title></title>
 </head>
 <body>
-<div class="guides">
+<div class="guides-list">
     <header th:replace="~{fragments/header::header}"></header>
-    <div th:replace="~{fragments/search-bar::search-bar}" aria-label="Search bar"></div>
     <main>
         <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-1 md:gap-x-8 md:gap-y-10">
             <div th:each="guide : ${guides}"
