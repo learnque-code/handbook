@@ -17,4 +17,6 @@ public class Guide {
     private String topics;
     private Date created;
     private Date changed;
+    private Boolean active;
+    private String repositoryName;
 }

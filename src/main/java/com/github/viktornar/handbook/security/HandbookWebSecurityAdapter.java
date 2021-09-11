@@ -1,5 +1,7 @@
 package com.github.viktornar.handbook.security;
 
+import com.github.viktornar.handbook.HandbookConfig;
+import com.github.viktornar.handbook.HandbookProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,12 +42,12 @@ public class HandbookWebSecurityAdapter extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService(HandbookProperties properties) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(
                 // TODO: Take user and password from env variable that will be defined in toncat
-                User.withUsername("admin")
-                        .password(passwordEncoder().encode("admin"))
+                User.withUsername(properties.getAdmin().getUsername())
+                        .password(passwordEncoder().encode(properties.getAdmin().getPassword()))
                         .authorities("ADMIN")
                         .build());
         return manager;

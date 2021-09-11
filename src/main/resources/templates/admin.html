@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header::html-head">
+    <title></title>
+</head>
+<body>
+<div class="guides-list">
+    <header th:replace="~{fragments/header::header}"></header>
+    <main>
+        <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-1 md:gap-x-8 md:gap-y-10">
+            <div th:each="guide : ${guides}"
+                    class="flex max-w-1xl bg-white border-2 border-gray-300 p-5 rounded-md tracking-wide shadow-lg">
+                <div class="flex-shrink-0">
+                    <div class="flex items-center justify-center p-3 w-24 rounded-md text-white border-2 border-gray-300">
+                        <a th:href="${guide.urlPath}" target="_parent"><img alt="book" th:src="@{/images/books.svg}" /></a>
+                    </div>
+                </div>
+                <div class="ml-4">
+                    <dt class="text-lg leading-6 font-medium text-gray-900" th:text="${guide.name}"></dt>
+                    <dd class="mt-2 text-base text-gray-500" th:text="${guide.description}"></dd>
+                    <div class="mt-2">
+                        <a th:href="${guide.urlPath}"
+                           target="_parent"
+                           class="bg-yellow-400 text-black active:bg-yellow-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                            Read me &rarr; </a>
+                        <a th:href="@{/admin/_switch/{id}(id=${guide.id})}"
+                           class="bg-green-400 text-black active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                            <span th:if="${guide.active}">Deactivate</span>
+                            <span th:if="${!guide.active}">Activate</span>
+                        </a>
+                        <a th:href="@{/admin/_update/{id}(id=${guide.id})}"
+                           class="bg-blue-400 text-black active:bg-orange-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                            Update
+                        </a>
+                        <a th:href="@{/admin/_delete/{id}(id=${guide.id})}"
+                           class="bg-red-400 text-black active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </dl>
+    </main>
+    <footer th:replace="~{fragments/footer::footer}"></footer>
+</div>
+</body>
+</html>

@@ -32,13 +32,13 @@ public class GuideService {
         var id = guideDao.existsByName(name);
         Optional.ofNullable(id).ifPresentOrElse(ei -> {
             var changed = guideDao.updateGuide("/guides/" + type + "/" + repositoryName,
-                    path.toString(), type.toString(), name, description, topics, ei);
+                    path.toString(), type.toString(), name, description, topics, repositoryName, ei);
             Optional.ofNullable(changed).ifPresentOrElse(
                     c -> log.info("Guide metadata updated in database with id {{}} at {{}}.", ei, changed),
                     () -> log.warn("Was not able to update guide metadata."));
         }, () -> {
             String newId = guideDao.insertGuide("/guides/" + type + "/" + repositoryName,
-                    path.toString(), type.toString(), name, description, topics);
+                    path.toString(), type.toString(), name, description, topics, repositoryName);
             Optional.ofNullable(newId).ifPresentOrElse(
                     ni -> log.info("Guide metadata persisted in database with id {{}}.", ni),
                     () -> log.warn("Was not able to persist guide metadata."));

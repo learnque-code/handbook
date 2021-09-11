@@ -22,6 +22,8 @@ public class GuideMapper implements RowMapper<Guide>{
                 .topics(rs.getString("topics"))
                 .changed(rs.getDate("changed"))
                 .created(rs.getDate("created"))
+                .active(rs.getBoolean("active"))
+                .repositoryName(rs.getString("repository_name"))
                 .build();
     }
 }

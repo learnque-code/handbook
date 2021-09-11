@@ -15,6 +15,9 @@ handbook:
     bin: ${HANDBOOK_HOME}/bin
     tmp: ${HANDBOOK_HOME}/tmp
     accessToken: ${HANDBOOK_ACCESS_TOKEN}
+  admin:
+    username: admin
+    password:
 spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml

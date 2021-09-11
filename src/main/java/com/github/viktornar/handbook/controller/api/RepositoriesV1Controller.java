@@ -1,6 +1,5 @@
 package com.github.viktornar.handbook.controller.api;
 
-import com.github.viktornar.handbook.dao.GuideDao;
 import com.github.viktornar.handbook.github.repositories.Repository;
 import com.github.viktornar.handbook.github.repositories.RepositoryExportException;
 import com.github.viktornar.handbook.github.repositories.RepositoryService;

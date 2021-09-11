@@ -1,5 +1,6 @@
 package com.github.viktornar.handbook;
 
+import com.github.viktornar.handbook.dao.GuideDao;
 import com.github.viktornar.handbook.filter.AccessTokenV1Filter;
 import com.github.viktornar.handbook.filter.RedirectToWelcomeFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -13,9 +14,9 @@ import java.util.List;
 @Configuration
 public class FilterConfig {
     @Bean
-    FilterRegistrationBean<Filter> guidesForwardFilter() {
+    FilterRegistrationBean<Filter> guidesForwardFilter(GuideDao guideDao) {
         FilterRegistrationBean<Filter> forwardFilter = new FilterRegistrationBean<>();
-        forwardFilter.setFilter(new RedirectToWelcomeFilter());
+        forwardFilter.setFilter(new RedirectToWelcomeFilter(guideDao));
         forwardFilter.setUrlPatterns(List.of("/guides/*"));
         return forwardFilter;
     }

@@ -1,6 +1,7 @@
 package com.github.viktornar.handbook.controller;
 
 import com.github.viktornar.handbook.dao.GuideDao;
+import com.github.viktornar.handbook.domain.Guide;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ public class WelcomeController {
     private final GuideDao guideDao;
 
     @GetMapping(value = { "" })
-    String welcome(Model model) {
+    String show(Model model) {
         var guides = guideDao.allGuides();
+        var noneMatch = guides.stream().noneMatch(Guide::getActive);
         model.addAttribute("guides", guides);
+        model.addAttribute("noneMatch", noneMatch);
         return "welcome";
     }
 }

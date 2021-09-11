@@ -20,6 +20,9 @@ public class HandbookProperties {
     private final Web web = new Web();
 
     @Getter
+    private final Admin admin = new Admin();
+
+    @Getter
     @Setter
     public static class Github {
         @Pattern(regexp = "([0-9a-z]*)?")
@@ -39,5 +42,12 @@ public class HandbookProperties {
         private String bin = "./bin";
         private String tmp = "./web";
         private String accessToken = "";
+    }
+
+    @Getter
+    @Setter
+    public static class Admin {
+        private String username = "admin";
+        private String password = "admin";
     }
 }
