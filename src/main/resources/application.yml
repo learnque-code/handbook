@@ -17,7 +17,7 @@ handbook:
     accessToken: ${HANDBOOK_ACCESS_TOKEN}
   admin:
     username: admin
-    password:
+    password: admin
 spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
