@@ -1,8 +1,7 @@
 package com.github.viktornar.handbook.service;
 
-import com.github.viktornar.handbook.HandbookProperties;
 import com.github.viktornar.handbook.dao.GuideDao;
-import com.github.viktornar.handbook.domain.Guide;
+import com.github.viktornar.handbook.dto.GuideDTO;
 import com.github.viktornar.handbook.github.repositories.RepositoryService;
 import com.github.viktornar.handbook.github.repositories.RepositoryType;
 import com.github.viktornar.handbook.utils.FileUtils;
@@ -59,7 +58,7 @@ public class GuideService {
         });
     }
 
-    public List<Guide> findAll() {
+    public List<GuideDTO> findAll() {
         return guideDao.allGuides();
     }
 }

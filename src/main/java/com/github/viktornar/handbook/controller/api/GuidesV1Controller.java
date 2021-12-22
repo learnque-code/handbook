@@ -1,6 +1,6 @@
 package com.github.viktornar.handbook.controller.api;
 
-import com.github.viktornar.handbook.domain.Guide;
+import com.github.viktornar.handbook.dto.GuideDTO;
 import com.github.viktornar.handbook.service.GuideService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ public class GuidesV1Controller extends ApiV1Controller {
     private final GuideService guideService;
 
     @GetMapping(value = {"guides"})
-    List<Guide> getGuides() {
+    List<GuideDTO> getGuides() {
         return guideService.findAll();
     }
 

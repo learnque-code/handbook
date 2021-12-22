@@ -1,6 +1,6 @@
 package com.github.viktornar.handbook.mapper;
 
-import com.github.viktornar.handbook.domain.Guide;
+import com.github.viktornar.handbook.dto.GuideDTO;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class GuideMapper implements RowMapper<Guide>{
+public class GuideMapper implements RowMapper<GuideDTO>{
     @Override
-    public Guide map(ResultSet rs, StatementContext ctx) throws SQLException {
-        return Guide.builder()
+    public GuideDTO map(ResultSet rs, StatementContext ctx) throws SQLException {
+        return GuideDTO.builder()
                 .id(rs.getString("id"))
                 .name(rs.getString("name"))
                 .description(rs.getString("description"))

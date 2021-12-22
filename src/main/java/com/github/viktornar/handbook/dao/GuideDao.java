@@ -1,6 +1,6 @@
 package com.github.viktornar.handbook.dao;
 
-import com.github.viktornar.handbook.domain.Guide;
+import com.github.viktornar.handbook.dto.GuideDTO;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
@@ -9,11 +9,10 @@ import org.jdbi.v3.sqlobject.transaction.Transaction;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface GuideDao {
     @SqlQuery("select * from guides where name = :name")
-    Guide findByName(@Bind("name") String name);
+    GuideDTO findByName(@Bind("name") String name);
 
     @SqlQuery("select distinct id from guides where name = :name")
     String existsByName(@Bind("name") String name);
@@ -34,10 +33,10 @@ public interface GuideDao {
     String insertGuide(String urlPath, String path, String type, String name, String description, String topics, String repositoryName);
 
     @SqlQuery("select * from guides")
-    List<Guide> allGuides();
+    List<GuideDTO> allGuides();
 
     @SqlQuery("select * from guides where id = ?")
-    Guide findById(String id);
+    GuideDTO findById(String id);
 
     @SqlUpdate("delete from guides where id = ?")
     int deleteById(String id);

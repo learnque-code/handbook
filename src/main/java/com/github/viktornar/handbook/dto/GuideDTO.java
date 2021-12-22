@@ -1,4 +1,4 @@
-package com.github.viktornar.handbook.domain;
+package com.github.viktornar.handbook.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Builder
 @Data
-public class Guide {
+public class GuideDTO {
     private String id;
     private String urlPath;
     private String path;
